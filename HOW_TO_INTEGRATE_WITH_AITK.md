@@ -19,7 +19,7 @@ This document outlines how to integrate and test the VS Code Copilot Chat extens
 
 2. **Install Dependencies**
    ```bash
-   cd my-vscode-copilot-chat
+   cd aitk-vscode-copilot-chat
    npm install
    ```
 
