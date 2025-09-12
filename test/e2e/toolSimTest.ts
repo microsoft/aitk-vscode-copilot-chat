@@ -63,8 +63,13 @@ export function generateToolTestRunner(toolScenario: IConversationToolTestCase |
 
 		return generateScenarioTestRunner(scenario, async (accessor, question, userVisibleAnswer, rawResponse, turn, scenarioIndex, commands) => {
 			const toolCalls = turn?.resultMetadata?.toolCallRounds;
+			const toolUseCalls = turn?.resultMetadata?.toolCallRounds && turn.resultMetadata.toolCallRounds[0]?.toolCalls;
 			if (!toolCalls || toolCalls.length === 0) {
 				return { success: false, errorMessage: 'No tool calls were made.' };
+			}
+
+			if (!toolUseCalls || toolUseCalls.length === 0) {
+				return { success: false, errorMessage: 'No tool use calls were made.' };
 			}
 
 			if (toolCalls.length !== 1) {

@@ -1,0 +1,42 @@
+{
+    "activeTextEditor": {
+        "selections": [
+            {
+                "anchor": {
+                    "line": 15,
+                    "character": 0
+                },
+                "active": {
+                    "line": 20,
+                    "character": 1
+                },
+                "start": {
+                    "line": 15,
+                    "character": 0
+                },
+                "end": {
+                    "line": 20,
+                    "character": 1
+                }
+            }
+        ],
+        "documentFilePath": "workspace/functions.py",
+        "visibleRanges": [
+            {
+                "start": {
+                    "line": 15,
+                    "character": 0
+                },
+                "end": {
+                    "line": 20,
+                    "character": 1
+                }
+            }
+        ],
+        "languageId": "python"
+    },
+    "activeFileDiagnostics": [],
+    "debugConsoleOutput": "",
+    "terminalBuffer": "",
+    "terminalSelection": ""
+}

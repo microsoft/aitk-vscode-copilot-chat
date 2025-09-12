@@ -1125,6 +1125,135 @@
 				"icon": "$(pencil)",
 				"displayName": "Edit Files",
 				"toolReferenceName": "editFiles"
+			},
+			{
+				"name": "copilot_modelSuggestion",
+				"displayName": "%github.copilot.tools.modelSuggestion.name%",
+				"modelDescription": "Essential tool for any AI development task - provides expert guidance and best practices for choosing the right model, implementation patterns, optimization strategies, etc., to ensure your AI solution works effectively.",
+				"toolReferenceName": "modelSuggestion",
+				"canBeReferencedInPrompt": true,
+				"tags": [],
+				"inputSchema": {
+					"type": "object",
+					"properties": {
+						"preferredHost": {
+							"type": "array",
+							"description": "Host preferences (NOT publisher) for the AI model. If preference not determined or matched, use empty array. Can have multiple preferences if needed.",
+							"items": {
+								"type": "string",
+								"enum": [
+									"GitHub",
+									"AzureAIFoundry",
+									"OpenAI",
+									"Anthropic",
+									"Google",
+									"other"
+								],
+								"description": "Preferred host for the AI model.\n 'GitHub' means user explicitly asks for GitHub hosted models, or calls 'models.inference.ai.azure.com', or 'models.github.ai', or uses GitHub token to access model;\n 'AzureAIFoundry' means user explicitly asks for Azure AI Foundry hosted models, or calls '*.ai.azure.com', or '*.openai.azure.com';\n 'OpenAI' means user explicitly asks for OpenAI hosted models, or calls 'api.openai.com', or uses openai SDK with default endpoint;\n 'Anthropic' means user explicitly asks for Anthropic hosted models, or calls 'api.anthropic.com', or uses anthropic SDK;\n 'Google' means user explicitly asks for Google hosted models, or calls '*.googleapis.com', or uses google generativeai SDK;\n 'other' means none of above."
+							}
+						},
+						"preferredLanguage": {
+							"type": "array",
+							"description": "Programming language preferences for the AI model. If preference not determined or no match, or no coding requirement, use empty array. Can have multiple preferences if needed.",
+							"items": {
+								"type": "string",
+								"enum": [
+									"Python",
+									"Node.js",
+									".NET",
+									"Java",
+									"other"
+								],
+								"description": "Preferred programming language for the AI model. 'Python'; JavaScript or TypeScript to 'Node.js'; C# to '.NET'; 'Java'; 'other' means none of above."
+							}
+						},
+						"preferredSDK": {
+							"type": "array",
+							"description": "SDK preferences for the AI model. If preference not determined or no match, or no coding requirement, use empty array. Can have multiple preferences if needed.",
+							"items": {
+								"type": "string",
+								"enum": [
+									"AzureAIInference",
+									"OpenAI",
+									"other"
+								],
+								"description": "Preferred SDK for the AI model if clearly determined.\n 'AzureAIInference' means user prefers Azure AI Inference SDK / azure-ai-inference / azure ai inference;\n 'OpenAI' means user prefers OpenAI SDK / openai;\n 'other' means none of above."
+							}
+						},
+						"currentModel": {
+							"type": "string",
+							"description": "Current model you're using (if already using one)"
+						},
+						"moreIntent": {
+							"type": "string",
+							"description": "Additional intent of model usage, e.g. 'ask for model choice', 'generate code', 'compare models', etc."
+						}
+					},
+					"required": [
+						"preferredHost",
+						"preferredLanguage",
+						"preferredSDK"
+					]
+				}
+			},
+			{
+				"name": "copilot_generatePrompt",
+				"displayName": "%github.copilot.tools.generatePrompt.name%",
+				"modelDescription": "Change prompts in code to adapt it for specific scenarios and use cases. Takes existing code and modifies the prompts to match the given scenario (e.g., board games, cooking, fitness, education, etc.). Helps you quickly adapt template code for your specific AI application needs.",
+				"toolReferenceName": "generatePrompt",
+				"canBeReferencedInPrompt": true,
+				"tags": [],
+				"inputSchema": {
+					"type": "object",
+					"properties": {
+						"scenario": {
+							"type": "string",
+							"description": "A clear description of the scenario or application domain you want to generate prompts for. Examples: 'board game AI app', 'cooking assistant', 'fitness trainer', 'educational tutor', etc. If not provided, the tool will generate a positive scenario automatically."
+						}
+					}
+				}
+			},
+			{
+				"name": "copilot_getTracingCodeGenBestPractices",
+				"displayName": "%github.copilot.tools.getTracingCodeGenBestPractices.name%",
+				"modelDescription": "This tool returns a list of best practices for code generation and operations when working with tracing for AI applications. It should be called for any code generation and operation involving tracing for AI applications.",
+				"toolReferenceName": "getTracingCodeGenBestPractices",
+				"canBeReferencedInPrompt": true,
+				"tags": [],
+				"inputSchema": {
+					"type": "object",
+					"properties": {
+						"language": {
+							"type": "string",
+							"description": "The programming language of the AI application",
+							"enum": [
+								"python",
+								"javascript",
+								"typescript",
+								"others"
+							]
+						},
+						"sdk": {
+							"type": "string",
+							"description": "The AI SDK used by the application. The main module for openai-agents Python SDK is `agents`, and the usage is like `from agents import Agent\nagent = Agent(name=\"Hello agent\", instructions=\"You are a helpful agent.\")`.",
+							"enum": [
+								"openai",
+								"openai-agents",
+								"azure-ai-inference",
+								"azure-ai-agents",
+								"azure-ai-projects",
+								"langchain",
+								"google-genai",
+								"anthropic",
+								"others"
+							]
+						}
+					},
+					"required": [
+						"language",
+						"sdk"
+					]
+				}
 			}
 		],
 		"languageModelToolSets": [
@@ -3986,7 +4115,7 @@
 		"get_env": "tsx script/setup/getEnv.mts",
 		"get_token": "tsx script/setup/getToken.mts",
 		"prettier": "prettier --list-different --write --cache .",
-		"simulate": "node dist/simulationMain.js",
+		"simulate": "cross-env SKIP_TELEMETRY=1 SIMULATION=1 node dist/simulationMain.js -n 1 --skip-cache",
 		"simulate-require-cache": "node dist/simulationMain.js --require-cache",
 		"simulate-ci": "node dist/simulationMain.js --ci --require-cache",
 		"simulate-update-baseline": "node dist/simulationMain.js --update-baseline",
@@ -4045,6 +4174,7 @@
 		"@vscode/vsce": "3.6.0",
 		"@vscode/zeromq": "0.2.7",
 		"copyfiles": "^2.4.1",
+		"cross-env": "^10.0.0",
 		"csv-parse": "^6.0.0",
 		"dotenv": "^17.2.0",
 		"electron": "^37.2.1",

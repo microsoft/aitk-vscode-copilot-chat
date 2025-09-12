@@ -1,0 +1,19 @@
+[
+    {
+        "question": "/editAgent Generate a prompt good for summarizing documents?",
+        "stateFile": "./tools.state.json",
+        "expectedToolCalls": "generate_prompt",
+        "toolInputValues": {
+        },
+        "tools": {
+            "find_files": true,
+			"grep_search": true,
+			"read_file": true,
+			"insert_edit_into_file": true,
+			"semantic_search": true,
+			"list_dir": true,
+			"search_workspace_symbols": true,
+            "generate_prompt": true
+        }
+    }
+]

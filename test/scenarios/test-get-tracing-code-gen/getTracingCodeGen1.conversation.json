@@ -1,0 +1,17 @@
+[
+    {
+        "question": "/editAgent Add the local tracing?",
+        "stateFile": "./tools.state.json",
+        "expectedToolCalls": "get_tracing_code_gen_best_practices",
+        "tools": {
+            "find_files": true,
+			"grep_search": true,
+			"read_file": true,
+			"insert_edit_into_file": true,
+			"semantic_search": true,
+			"list_dir": true,
+			"search_workspace_symbols": true,
+            "get_tracing_code_gen_best_practices": true
+        }
+    }
+]

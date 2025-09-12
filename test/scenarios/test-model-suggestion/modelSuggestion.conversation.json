@@ -1,0 +1,19 @@
+[
+    {
+        "question": "/editAgent Suggest me a model that is cheap and good for summarizing documents",
+        "stateFile": "./tools.state.json",
+        "expectedToolCalls": "model_suggestion",
+        "toolInputValues": {
+        },
+        "tools": {
+            "find_files": true,
+			"grep_search": true,
+			"read_file": true,
+			"insert_edit_into_file": true,
+			"semantic_search": true,
+			"list_dir": true,
+			"search_workspace_symbols": true,
+            "model_suggestion": true
+        }
+    }
+]

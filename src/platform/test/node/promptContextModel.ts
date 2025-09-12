@@ -54,7 +54,12 @@ function copyFolderContents(src: string, dest: string) {
 	for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
 		const srcPath = path.join(src, entry.name);
 		const destPath = path.join(dest, entry.name);
-		fs.cpSync(srcPath, destPath, { recursive: true });
+		console.log(`Copying ${srcPath} to ${destPath}`);
+		try {
+			fs.cpSync(srcPath, destPath, { recursive: true });
+		} catch (err) {
+			console.error(`Error copying ${srcPath} to ${destPath}: ${err}`);
+		}
 	}
 }
 

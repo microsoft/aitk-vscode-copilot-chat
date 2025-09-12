@@ -39,6 +39,7 @@ const baseNodeBuildOptions = {
 		'zeromq',
 		'electron', // this is for simulation workbench,
 		'sqlite3',
+		'@vscode/sqlite3',
 		...(isDev ? [] : ['dotenv', 'source-map-support'])
 	],
 	platform: 'node',
@@ -361,18 +362,18 @@ function applyPackageJsonPatch(isPreRelease: boolean) {
 	const json = JSON.parse(fs.readFileSync(packagejsonPath).toString());
 
 	const newProps: any = {
-		buildType: 'prod',
+		buildType: 'dev',
 		isPreRelease,
 	};
 
 	const patchedPackageJson = Object.assign(json, newProps);
 
 	// Remove fields which might reveal our development process
-	delete patchedPackageJson['scripts'];
-	delete patchedPackageJson['devDependencies'];
-	delete patchedPackageJson['dependencies'];
+	// delete patchedPackageJson['scripts'];
+	// delete patchedPackageJson['devDependencies'];
+	// delete patchedPackageJson['dependencies'];
 
-	fs.writeFileSync(packagejsonPath, JSON.stringify(patchedPackageJson));
+	fs.writeFileSync(packagejsonPath, JSON.stringify(patchedPackageJson, null, 2));
 }
 
 main();

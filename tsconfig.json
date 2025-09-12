@@ -1,41 +1,41 @@
 {
-	"extends": "./tsconfig.base.json",
-	"compilerOptions": {
-		"jsx": "react",
-		"jsxFactory": "vscpp",
-		"jsxFragmentFactory": "vscppf",
-		"rootDir": ".",
-		"types": [
-			"minimist",
-			"mocha",
-			"node",
-			"picomatch",
-			"sinon",
-			"tar",
-			"vscode"
-		],
-		// Needed for tsx to run test files
-		"paths": {
-			"vscode": ["./src/util/common/test/shims/vscodeTypesShim.ts"],
-			"#lib/*": ["./src/extension/completions-core/lib/src/*"],
-			"#prompt/*": ["./src/extension/completions-core/prompt/src/*"],
-			"#types": ["./src/extension/completions-core/types/src"]
-		}
-	},
-	"include": [
-		"vscodeTypes.ts",
-		"src",
-		"test",
-		".vscode/extensions/test-extension"
-	],
-	"exclude": [
-		"test/scenarios/**/*",
-		"test/simulation/fixtures/**/*",
-		"test/simulation/workbench/**/*",
-		"src/platform/parser/test/node/fixtures/**/*",
-		"src/extension/test/node/fixtures/**/*",
-		"src/extension/prompts/node/test/fixtures/**/*",
-		"src/extension/typescriptContext/serverPlugin/fixtures/**",
-		"test/aml/out"
-	]
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react",
+    "jsxFactory": "vscpp",
+    "jsxFragmentFactory": "vscppf",
+    "types": [
+      "minimist",
+      "mocha",
+      "node",
+      "picomatch",
+      "sinon",
+      "tar",
+      "vscode"
+    ],
+    // Needed for tsx to run test files
+    "paths": {
+      "vscode": ["./src/util/common/test/shims/vscodeTypesShim.ts"],
+      "ai-mlstudio/*": ["../Skylight/vscode/ai-mlstudio/src/*"],
+      "#lib/*": ["./src/extension/completions-core/lib/src/*"],
+      "#prompt/*": ["./src/extension/completions-core/prompt/src/*"],
+      "#types": ["./src/extension/completions-core/types/src"]
+    }
+  },
+  "include": [
+    "vscodeTypes.ts",
+    "src",
+    "test",
+    ".vscode/extensions/test-extension"
+  ],
+  "exclude": [
+    "test/scenarios/**/*",
+    "test/simulation/fixtures/**/*",
+    "test/simulation/workbench/**/*",
+    "src/platform/parser/test/node/fixtures/**/*",
+    "src/extension/test/node/fixtures/**/*",
+    "src/extension/prompts/node/test/fixtures/**/*",
+    "src/extension/typescriptContext/serverPlugin/fixtures/**",
+    "test/aml/out"
+  ]
 }
