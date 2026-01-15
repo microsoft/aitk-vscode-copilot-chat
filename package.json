@@ -4109,7 +4109,7 @@
 		"@xterm/headless": "^5.5.0",
 		"ajv": "^8.17.1",
 		"applicationinsights": "^2.9.7",
-		"diff": "^8.0.2",
+		"diff": "^8.0.3",
 		"ignore": "^7.0.5",
 		"isbinaryfile": "^5.0.4",
 		"jsonc-parser": "^3.3.1",
